@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ayx · 轻量主题介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: linear-gradient(145deg, #fbe9e0 0%, #fce4d6 50%, #f8d5c4 100%);
+            min-height: 100vh;
+            padding: 24px 20px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #3d2c24;
+            line-height: 1.7;
+        }
+
+        .page-wrap {
+            max-width: 960px;
+            width: 100%;
+        }
+
+        /* 导航条 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 250, 245, 0.75);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 14px 28px;
+            border-radius: 48px;
+            box-shadow: 0 4px 12px rgba(180, 110, 80, 0.08);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-brand {
+            font-weight: 550;
+            font-size: 1.35rem;
+            letter-spacing: 1px;
+            color: #7a4d3a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #5b3a2c;
+            font-weight: 450;
+            font-size: 0.98rem;
+            padding: 4px 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.25s, color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: #b67b61;
+            color: #3c241b;
+        }
+
+        /* 卡片通用 */
+        .card {
+            background: #fffcf9;
+            border-radius: 32px;
+            padding: 36px 34px;
+            box-shadow: 0 8px 28px rgba(150, 90, 65, 0.06), 0 2px 6px rgba(190, 120, 90, 0.04);
+            margin-bottom: 36px;
+            transition: box-shadow 0.3s;
+        }
+
+        .card-soft {
+            background: rgba(255, 250, 244, 0.7);
+            backdrop-filter: blur(2px);
+        }
+
+        /* hero 段落 */
+        .hero-area {
+            text-align: center;
+            padding: 36px 30px 44px;
+        }
+
+        .hero-area h1 {
+            font-size: 2.2rem;
+            font-weight: 520;
+            letter-spacing: 1.5px;
+            color: #4b2f23;
+            margin-bottom: 18px;
+        }
+
+        .hero-area .sub {
+            font-size: 1.1rem;
+            max-width: 620px;
+            margin: 0 auto 12px;
+            color: #5d4033;
+        }
+
+        .hero-area .highlight-word {
+            display: inline-block;
+            background: #edcbb9;
+            padding: 0 14px;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .tagline {
+            margin-top: 24px;
+            font-size: 1rem;
+            color: #7b5a49;
+            border-top: 1px solid #eddaca;
+            padding-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .tagline span {
+            background: #f7e6db;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.92rem;
+        }
+
+        /* 三场景模块：用卡片网格 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .scene-item {
+            background: #fffcf9;
+            border-radius: 28px;
+            padding: 28px 20px 24px;
+            box-shadow: 0 6px 16px rgba(140, 80, 55, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.25s;
+            border: 1px solid rgba(235, 205, 188, 0.3);
+        }
+
+        .scene-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 26px rgba(140, 80, 55, 0.08);
+        }
+
+        .scene-item h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #4f3427;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scene-item p {
+            font-size: 0.94rem;
+            color: #4f3a2f;
+            margin-bottom: 8px;
+        }
+
+        .scene-item .emoji-marker {
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        /* 常见说明 / FAQ 摘要 */
+        .faq-compact {
+            margin-top: 12px;
+        }
+
+        .faq-row {
+            padding: 16px 0;
+            border-bottom: 1px solid #edd9cb;
+        }
+
+        .faq-row:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 520;
+            color: #4b3327;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .faq-q::before {
+            content: "▸";
+            color: #b17b62;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #5c4438;
+            padding-left: 22px;
+            font-size: 0.93rem;
+        }
+
+        /* 句子中的链接 */
+        .inline-link {
+            color: #9b5f43;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #dbb9a6;
+            transition: border-bottom 0.2s, color 0.2s;
+        }
+
+        .inline-link:hover {
+            color: #6d3e28;
+            border-bottom: 1px solid #b47c63;
+        }
+
+        /* 温馨提示 */
+        .tip-note {
+            background: #f7ede6;
+            border-radius: 40px;
+            padding: 18px 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px 20px;
+            margin: 30px 0 10px;
+        }
+
+        .tip-note p {
+            font-size: 0.95rem;
+            color: #4f3b30;
+            flex: 1;
+        }
+
+        .tip-note .badge {
+            background: #dbbaa6;
+            color: #2d1d15;
+            padding: 8px 22px;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 470;
+            white-space: nowrap;
+        }
+
+        /* 页脚 */
+        .foot {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7d6658;
+            border-top: 1px solid #e7d3c4;
+            padding-top: 28px;
+        }
+
+        .foot a {
+            color: #8b6b59;
+            text-decoration: none;
+            border-bottom: 1px dotted #c9aa96;
+        }
+
+        .foot a:hover {
+            border-bottom: 1px solid #7e543f;
+        }
+
+        /* 响应式 */
+        @media (max-width: 780px) {
+            .scene-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .top-nav {
+                padding: 12px 20px;
+                border-radius: 32px;
+            }
+            .hero-area h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .scene-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .card {
+                padding: 28px 18px;
+            }
+            .hero-area {
+                padding: 20px 12px 34px;
+            }
+            .nav-links {
+                gap: 18px;
+            }
+            .faq-a {
+                padding-left: 16px;
+            }
+            .tip-note {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrap">
+
+    <!-- 导航 -->
+    <nav class="top-nav">
+        <div class="nav-brand">✦ ayx</div>
+        <div class="nav-links">
+            <a href="#intro">背景</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">说明</a>
+        </div>
+    </nav>
+
+    <!-- hero 介绍 -->
+    <div class="card hero-area" id="intro">
+        <h1>围绕 <span class="highlight-word">ayx</span> 的轻量叙事</h1>
+        <p class="sub">一个关键词背后往往关联着主题、场景与日常使用方式。我们从「ayx」出发，聊聊它可能承载的内容方向。</p>
+        <div class="tagline">
+            <span>🌱 主题延伸</span>
+            <span>🧩 场景梳理</span>
+            <span>📎 常见疑问</span>
+        </div>
+    </div>
+
+    <!-- 核心介绍：从关键词展开 -->
+    <div class="card card-soft">
+        <p style="font-size:1.04rem; margin-bottom:16px;">
+            如果把 <a href="https://biz-ayx.com.cn" class="inline-link">ayx</a> 看作一个简短的标识，
+            它可能指向某个服务、工具或信息聚合的起点。我们不去过度解读，而是试着整理它周围可能存在的几个常见面向。
+        </p>
+        <p style="color:#4d382d;">
+            一方面，这类短代码常出现在业务入口、应用名称或配置标识中；另一方面，它的使用场景往往围绕查找、操作或互动展开。
+            以下是三个典型的分支场景，每个都带有日常属性。
+        </p>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <div id="scenes" class="scene-grid">
+        <div class="scene-item">
+            <h3><span class="emoji-marker">🔍</span> 检索与定位</h3>
+            <p>在信息界面或后台流程中，通过 ayx 快速找到对应条目、配置项或记录。它像是一个坐标，减少层层翻阅的麻烦。</p>
+            <p style="font-size:0.9rem; margin-top:10px; color:#7e5f4d;">常见于筛选、搜索或代码片段引用。</p>
+        </div>
+        <div class="scene-item">
+            <h3><span class="emoji-marker">🧰</span> 轻量工具入口</h3>
+            <p>某些业务场景下，ayx 被用作工具或模块的快捷入口。用户不需要记住复杂路径，只需知道这个标识就能到达对应功能区域。</p>
+            <p style="font-size:0.9rem; margin-top:10px; color:#7e5f4d;">适合仪表盘、常用操作或外部跳转。</p>
+        </div>
+        <div class="scene-item">
+            <h3><span class="emoji-marker">📋</span> 配置与状态</h3>
+            <p>在系统设置、账户属性或环境变量里，ayx 可能代表一组参数或状态标识。它帮助开发或维护人员快速理解当前上下文。</p>
+            <p style="font-size:0.9rem; margin-top:10px; color:#7e5f4d;">多用于说明文档、环境检查或反馈信息。</p>
+        </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <div class="card" id="faq">
+        <h2 style="font-weight: 470; font-size: 1.5rem; color:#4b3327; margin-bottom: 22px; border-left: 6px solid #dbb4a0; padding-left: 16px;">一些常见说明</h2>
+        <div class="faq-compact">
+            <div class="faq-row">
+                <div class="faq-q">ayx 是一个产品名称吗？</div>
+                <div class="faq-a">不一定是。它更多是标识或代称，可能对应内部项目、分类或链接指向，具体含义取决于上下文。</div>
+            </div>
+            <div class="faq-row">
+                <div class="faq-q">使用 ayx 需要额外注册吗？</div>
+                <div class="faq-a">这取决于该标识绑定的系统。通常它只是一个入口或线索，不需要单独为标识本身注册。</div>
+            </div>
+            <div class="faq-row">
+                <div class="faq-q">如何找到与 ayx 相关的更多信息？</div>
+                <div class="faq-a">可以通过对应平台或页面的指引进一步了解。如果已有使用环境，直接参考内置帮助或说明即可。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示 + 底部导航式链接 -->
+    <div class="tip-note">
+        <p>💡 如果你恰好需要了解 <a href="https://biz-ayx.com.cn" class="inline-link">ayx</a> 的具体用法，不妨先浏览当前页面的几个场景模块，它们覆盖了最常见的切入角度。</p>
+        <span class="badge">温和 · 不夸大</span>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="foot">
+        <span>基于开放视角整理 · 内容仅供参考</span><br>
+        <span style="display: inline-block; margin-top: 10px;">关于 <a href="https://biz-ayx.com.cn">ayx</a> 的更详细描述，请以对应平台的实际信息为准。</span>
+    </div>
+
+</div>
+</body>
+</html>
